@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using UnitConverterCSharp.Services;
 
 class Program
@@ -9,7 +10,8 @@ class Program
         Converter Conv = new Converter();
 
         //Program apresentation
-        Console.WriteLine("Unit Converter type:");
+        Console.WriteLine("Welcome to Unit Converter!");
+        Console.WriteLine("Select the following options to convert:");
         Console.WriteLine("1) To converte Celsius to Fahrenheit.");
         Console.WriteLine("2) To converte Fahrenheit to Celsius.");
         Console.WriteLine("3) To converte Meters to Feet.");
@@ -18,8 +20,7 @@ class Program
         Console.WriteLine("6) To converte Pounds to Kilograms.");
 
         //Receiver to know what value convert
-        Console.Write("Type 1 to 6: ");
-        int N = int.Parse(Console.ReadLine());
-        Conv.Converting(N);
+        int input = int.Parse(Console.ReadLine());
+        Conv.Converting(input);
     }
 }
