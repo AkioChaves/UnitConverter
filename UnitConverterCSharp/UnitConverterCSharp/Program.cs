@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using UnitConverterCSharp.Models;
 
@@ -9,36 +10,18 @@ class Program
         //Calling the converter
         Converter Conv = new Converter();
 
-        while (true)
-        {
-            //Program apresentation
-            Conv.ProgramApresentation();
+        //Program apresentation
+        Conv.ProgramApresentation();
 
-            //Receiver to know what value convert
-            int input = int.Parse(Console.ReadLine());
+        //Receiver to know what value convert
+        Console.Write("Type the selected number: ");
+        int input = int.Parse(Console.ReadLine());
+        Console.WriteLine();
 
-            //Validation
-            switch (input)
-            {
-                case 1:
-                    Temperature temperature = new Temperature();
-                    temperature.ConvertTemperature();
-                    break;
-                case 2:
-                    Distance distance = new Distance();
-                    distance.ConvertDistance();
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                default:
-                    break;
-            }
-            Console.ReadLine();
-            Console.Clear();
-        }
+        //Validation
+        Conv.Converting(input);
+
+        Console.ReadLine();
+        Console.Clear();
     }
 }

@@ -30,10 +30,13 @@ namespace UnitConverterCSharp.Models
             }
         }
 
-        //Read input for converting
+        //Read value for converting
         private protected double ReadInputDouble() => double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+        //Read input to selecting what measure to convert
         private protected int ReadInputInt() => int.Parse(Console.ReadLine());
 
+        //Program apresentation
         public void ProgramApresentation()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -52,16 +55,17 @@ namespace UnitConverterCSharp.Models
         public virtual void WriteInput(params string[] measures)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            measures = new string[] { "Celsius", "Fahrenheit", "Kelvins" };
-            int x = 0;
+            int x = 1;
             stringBuilder.AppendLine($"You want to convert:");
             for (int i = 0; i < measures.Count(); i++)
             {
                 for (int j = 0; j < measures.Count(); j++)
                 {
                     if (i != j)
+                    {
                         stringBuilder.AppendLine($"{x}) {measures[i]} to {measures[j]}.");
-                    x++;
+                        x++;
+                    }
                 }
             }
             Console.WriteLine(stringBuilder.ToString());
