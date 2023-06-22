@@ -1,26 +1,44 @@
 ﻿using System;
 using System.Globalization;
-using UnitConverterCSharp.Services;
+using UnitConverterCSharp.Models;
 
 class Program
 {
     static void Main(string[] args)
     {
-        //Calling the service to convert
+        //Calling the converter
         Converter Conv = new Converter();
 
-        //Program apresentation
-        Console.WriteLine("Welcome to Unit Converter!");
-        Console.WriteLine("Select the following options to convert:");
-        Console.WriteLine("1) To converte Celsius to Fahrenheit.");
-        Console.WriteLine("2) To converte Fahrenheit to Celsius.");
-        Console.WriteLine("3) To converte Meters to Feet.");
-        Console.WriteLine("4) To converte Feet to Meters.");
-        Console.WriteLine("5) To converte Kilograms to Pounds.");
-        Console.WriteLine("6) To converte Pounds to Kilograms.");
+        while (true)
+        {
+            //Program apresentation
+            Conv.ProgramApresentation();
 
-        //Receiver to know what value convert
-        int input = int.Parse(Console.ReadLine());
-        Conv.Converting(input);
+            //Receiver to know what value convert
+            int input = int.Parse(Console.ReadLine());
+
+            //Validation
+            switch (input)
+            {
+                case 1:
+                    Temperature temperature = new Temperature();
+                    temperature.ConvertTemperature();
+                    break;
+                case 2:
+                    Distance distance = new Distance();
+                    distance.ConvertDistance();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                default:
+                    break;
+            }
+            Console.ReadLine();
+            Console.Clear();
+        }
     }
 }
