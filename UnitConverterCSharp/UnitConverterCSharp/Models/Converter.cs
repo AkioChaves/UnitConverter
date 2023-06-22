@@ -20,6 +20,8 @@ namespace UnitConverterCSharp.Models
                     distance.ConvertDistance();
                     break;
                 case 3:
+                    Weight weight = new Weight();
+                    weight.ConvertWeight();
                     break;
                 case 4:
                     break;
