@@ -28,6 +28,8 @@ namespace UnitConverterCSharp.Models
                     lenght.ConvertLenght();
                     break;
                 case 5:
+                    Time time = new Time();
+                    time.ConvertTime();
                     break;
                 default:
                     break;
