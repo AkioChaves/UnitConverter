@@ -24,6 +24,8 @@ namespace UnitConverterCSharp.Models
                     weight.ConvertWeight();
                     break;
                 case 4:
+                    Lenght lenght = new Lenght();
+                    lenght.ConvertLenght();
                     break;
                 case 5:
                     break;
@@ -54,6 +56,7 @@ namespace UnitConverterCSharp.Models
             Console.WriteLine(stringBuilder.ToString());
         }
 
+        //Write what measures want to convert
         public virtual void WriteInput(params string[] measures)
         {
             StringBuilder stringBuilder = new StringBuilder();

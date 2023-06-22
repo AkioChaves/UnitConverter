@@ -9,6 +9,7 @@ namespace UnitConverterCSharp.Models
 {
     internal class Temperature : Converter
     {
+        //Validation for what measure convert
         public void ConvertTemperature()
         {
             WriteInput("Celsius", "Fahrenheit", "Kelvin");

@@ -9,6 +9,7 @@ namespace UnitConverterCSharp.Models
 {
     internal class Weight : Converter
     {
+        //Validation for what measure convert
         public void ConvertWeight()
         {
             WriteInput("Kilograms", "Pounds");

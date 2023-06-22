@@ -9,6 +9,7 @@ namespace UnitConverterCSharp.Models
 {
     internal class Distance : Converter
     {
+        //Validation for what measure convert
         public void ConvertDistance()
         {
             WriteInput("Kilometers", "Miles");
