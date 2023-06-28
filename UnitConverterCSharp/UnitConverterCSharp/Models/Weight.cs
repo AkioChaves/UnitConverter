@@ -4,48 +4,29 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnitConverterCSharp.Interfaces;
 
 namespace UnitConverterCSharp.Models
 {
-    internal class Weight : Converter
+    public class Weight: IResponse<Weight>
     {
-        //Validation for what measure convert
-        public void ConvertWeight()
-        {
-            WriteInput("Kilograms", "Pounds");
-            Console.Write("Type the selected number: ");
-            int input = ReadInputInt();
-            Console.WriteLine();
+        public Weight() { }
+        public Weight(double weight) { }
+        public Weight(int input, bool isKilogram) { }
 
-            switch (input)
-            {
-                case 1:
-                    KilogramsToPounds();
-                    break;
-                case 2:
-                    PoundsToKilograms();
-                    break;
-                default:
-                    break;
-            }
-        }
+        public Weight From { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Weight To { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string[] ResultAwsner { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        //Convert Kilograms to Pounds
-        public void KilogramsToPounds()
-        {
-            Console.Write("Enter the number of Kilograms: ");
-            double kilograms = ReadInputDouble();
-            double pounds = ConvertMultiply(kilograms, 2.20462);
-            WriteResult(kilograms.ToString("F2", CultureInfo.InvariantCulture) + "Kg", pounds.ToString("F2", CultureInfo.InvariantCulture) + "lbs.");
-        }
+        public string[] Question => throw new NotImplementedException();
 
-        //Convert Pounds to Kilograms
-        public void PoundsToKilograms()
+        public string[] Options => throw new NotImplementedException();
+
+        public string[] Awsner { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public string InitialMessage()
         {
-            Console.Write("Enter the number of Pounds: ");
-            double pounds = ReadInputDouble();
-            double kilograms = ConvertDivide(pounds, 2.20462);
-            WriteResult(pounds.ToString("F2", CultureInfo.InvariantCulture) + "lbs", kilograms.ToString("F2", CultureInfo.InvariantCulture) + "Kg.");
+            throw new NotImplementedException();
         }
     }
 }

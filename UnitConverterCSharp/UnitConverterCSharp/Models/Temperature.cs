@@ -1,100 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnitConverterCSharp.Data;
+using UnitConverterCSharp.Interfaces;
 
 namespace UnitConverterCSharp.Models
 {
-    internal class Temperature : Converter
+    public class Temperature : IConvertHandler<TemperatureType>, 
     {
-        //Validation for what measure convert
-        public void ConvertTemperature()
+        #region Variables
+        public double Kelvin { get; private set; }
+        public double Fahrenheit
         {
-            WriteInput("Celsius", "Fahrenheit", "Kelvin");
-            Console.Write("Type the selected number: ");
-            int input = ReadInputInt();
-            Console.WriteLine();
+            get => Celsius * 9 / 5 + 32;
+            set => Celsius = (value - 32) * 5 / 9;
+        }
+        public double Celsius
+        {
+            get => Kelvin - 273.15;
+            set => Kelvin = value + 273.15;
+        }
 
-            switch (input)
+
+        public string[] Question
+        {
+            get
             {
-                case 1:
-                    CelsiusToFahrenheit();
-                    break;
-                case 2:
-                    CelsiusToKelvin();
-                    break;
-                case 3:
-                    FahrenheitToCelsius();
-                    break;
-                case 4:
-                    FahrenheitToKelvin();
-                    break;
-                case 5:
-                    KelvinToCelsius();
-                    break;
-                case 6:
-                    KelvinToFahrenheit();
-                    break;
-                default:
-                    break;
+                return new string[] { "Want to convert Temperature From: ", "To:" };
             }
-
         }
-
-        //Convert Celsius to Fahrenheit
-        public virtual void CelsiusToFahrenheit()
+        public string[] Options
         {
-            Console.Write("Enter the number of Celsius: ");
-            double celsius = ReadInputDouble();
-            double fahrenheit = ConvertAdd(celsius * 1.8, 32);
-            WriteResult(celsius.ToString("F2", CultureInfo.InvariantCulture) + "°C", fahrenheit.ToString("F2", CultureInfo.InvariantCulture) + "°F.");
+            get
+            {
+                return new string[] { "1) Kelvin", "2) Fahrenheit", "3) Celsius" };
+            }
+        }
+        public string[] Awsner
+        {
+            get
+            {
+                return new string[] { "Temperature is converted from {0} to {1} and the result is: {2}" };
+            }
+        }
+        #endregion
+
+        public Temperature() 
+        {
+           
+        }
+        public Temperature(double kelvin)
+        {
+            Kelvin = kelvin;
+        }
+        public Temperature(double temperature, TemperatureType unit)
+        {
+            ConvertFrom(temperature, unit);
         }
 
-        //Convert Celsius to Kelvin
-        public virtual void CelsiusToKelvin()
+        public TemperatureType ConvertTo(TemperatureType value)
         {
-            Console.Write("Enter the number of Celsius: ");
-            double celsius = ReadInputDouble();
-            double kelvin = ConvertAdd(celsius, 273.15);
-            WriteResult(celsius.ToString("F2", CultureInfo.InvariantCulture) + "°C", kelvin.ToString("F2", CultureInfo.InvariantCulture) + "°K.");
+            throw new NotImplementedException();
+        }
+        public void ConvertFrom(double unit, TemperatureType value)
+        {
+            throw new NotImplementedException();
         }
 
-        //Convert Fahrenheit to Celsius
-        public virtual void FahrenheitToCelsius()
-        {
-            Console.Write("Enter the number of Fahrenheit: ");
-            double fahrenheit = ReadInputDouble();
-            double celsius = ConvertDivide(fahrenheit - 32, 1.8);
-            WriteResult(fahrenheit.ToString("F2", CultureInfo.InvariantCulture) + "°F", celsius.ToString("F2", CultureInfo.InvariantCulture) + "°C.");
-        }
-
-        //Convert Fahrenheit to Kelvin
-        public virtual void FahrenheitToKelvin()
-        {
-            Console.Write("Enter the number of Fahrenheit: ");
-            double fahrenheit = ReadInputDouble();
-            double kelvin = ConvertAdd((fahrenheit - 32) * 5 / 9, 273.15);
-            WriteResult(fahrenheit.ToString("F2", CultureInfo.InvariantCulture) + "°F", kelvin.ToString("F2", CultureInfo.InvariantCulture) + "°K.");
-        }
-
-        //Convert Kelvin to Celsius
-        public virtual void KelvinToCelsius()
-        {
-            Console.Write("Enter the number of Kelvin: ");
-            double kelvin = ReadInputDouble();
-            double celsius = ConvertSub(kelvin, 273.15);
-            WriteResult(kelvin.ToString("F2", CultureInfo.InvariantCulture) + "°K", celsius.ToString("F2",CultureInfo.InvariantCulture) + "°C.");
-        }
-
-        //Convert Kelvin to Fahrenheit
-        public virtual void KelvinToFahrenheit()
-        {
-            Console.Write("Enter the number of Kelvin: ");
-            double kelvin = ReadInputDouble();
-            double fahrenheit = ConvertMultiply(kelvin - 273.15, 1.8);
-            WriteResult(kelvin.ToString("F2", CultureInfo.InvariantCulture) + "°K", fahrenheit.ToString("F2", CultureInfo.InvariantCulture) + "°F.");
-        }
     }
 }

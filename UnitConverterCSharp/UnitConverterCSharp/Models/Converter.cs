@@ -1,98 +1,67 @@
 ﻿using System.Globalization;
 using System.Text;
+using UnitConverterCSharp.Data;
+using UnitConverterCSharp.Handlers;
+using UnitConverterCSharp.Interfaces;
 
 namespace UnitConverterCSharp.Models
 {
-    //Class responsable to convert the values
     public class Converter
     {
-        public void Converting(int num)
+        public Converter() { }
+        public async Task Initialize()
         {
-            //Validation
-            switch (num)
+            while (true)
             {
-                case 1:
-                    Temperature temperature = new Temperature();
-                    temperature.ConvertTemperature();
+                var input = Utility.Read<int>();
+
+                await Convert((ConvertType)input);
+            }
+        }
+        public async Task Convert(ConvertType type)
+        {
+            switch (type)
+            {
+                case ConvertType.Temperature:
+                    TemperatureType temp = new TemperatureType();
+                    await Conversion(temp);
                     break;
-                case 2:
+                case ConvertType.Distance:
                     Distance distance = new Distance();
-                    distance.ConvertDistance();
+                    await Conversion(distance);
                     break;
-                case 3:
+                case ConvertType.Weight:
                     Weight weight = new Weight();
-                    weight.ConvertWeight();
-                    break;
-                case 4:
-                    Lenght lenght = new Lenght();
-                    lenght.ConvertLenght();
-                    break;
-                case 5:
-                    Time time = new Time();
-                    time.ConvertTime();
-                    break;
-                default:
+                    await Conversion(weight);
                     break;
             }
+
+            await Task.Delay(0);
         }
-
-        //Read value for converting
-        private protected double ReadInputDouble() => double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-
-        //Read input to selecting what measure to convert
-        private protected int ReadInputInt() => int.Parse(Console.ReadLine());
-
-        //Program apresentation
-        public void ProgramApresentation()
+        public async Task<IResponse<T>> Conversion<T>(IResponse<T> response)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            Utility.Write(response.Question[0]);
+            Utility.Write(response.Options);
 
-            stringBuilder.AppendLine("Welcome to Unit Converter!");
-            stringBuilder.AppendLine("Select the following options to convert:");
-            stringBuilder.AppendLine("1) Tempetature.");
-            stringBuilder.AppendLine("2) Distance.");
-            stringBuilder.AppendLine("3) Weight.");
-            stringBuilder.AppendLine("4) Lenght.");
-            stringBuilder.AppendLine("5) Time.");
+            int fromValue = Utility.Read<int>();
+            response.From = (T)Enum.Parse(typeof(T), fromValue.ToString());
 
-            Console.WriteLine(stringBuilder.ToString());
+            Utility.Write(response.Question[1]);
+            Utility.Write(response.Options);
+
+            int toValue = Utility.Read<int>();
+            response.To = (T)Enum.Parse(typeof(T), toValue.ToString());
+
+            Utility.Write(response.Question[2]);
+
+            //response.Result();
+
+            await Task.Delay(1 * 1000);
+
+            Utility.Write("To restart type R or restart");
+
+            return response;
         }
 
-        //Write what measures want to convert
-        public virtual void WriteInput(params string[] measures)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            int x = 1;
-            stringBuilder.AppendLine($"You want to convert:");
-            for (int i = 0; i < measures.Count(); i++)
-            {
-                for (int j = 0; j < measures.Count(); j++)
-                {
-                    if (i != j)
-                    {
-                        stringBuilder.AppendLine($"{x}) {measures[i]} to {measures[j]}.");
-                        x++;
-                    }
-                }
-            }
-            Console.WriteLine(stringBuilder.ToString());
-        }
-
-        //Write the result
-        private protected void WriteResult(string input, string result)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(input);
-            stringBuilder.Append(" is equal to ");
-            stringBuilder.Append(result);
-
-            Console.WriteLine(stringBuilder.ToString());
-        }
-
-        //Math
-        public double ConvertMultiply(double a, double b) => a * b;
-        public double ConvertDivide(double a, double b) => a / b;
-        public double ConvertAdd(double a, double b) => a + b;
-        public double ConvertSub(double a, double b) => a - b;
     }
 }
