@@ -1,27 +1,16 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+﻿using UnitConverterCSharp.Constants;
+using UnitConverterCSharp.Handlers;
 using UnitConverterCSharp.Models;
 
 class Program
 {
-    static void Main(string[] args)
+    public static async Task Main()
     {
-        //Calling the converter
-        Converter Conv = new Converter();
+        foreach (string text in Strings.INITIAL_TEXT) { Utility.Write(text); }
 
-        //Program apresentation
-        Conv.ProgramApresentation();
+        Converter convert = new Converter();
 
-        //Receiver to know what value convert
-        Console.Write("Type the selected number: ");
-        int input = int.Parse(Console.ReadLine());
-        Console.WriteLine();
-
-        //Validation
-        Conv.Converting(input);
-
-        Console.ReadLine();
-        Console.Clear();
+        await convert.Initialize();
     }
+
 }

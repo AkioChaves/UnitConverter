@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitConverterCSharp.Models
+namespace UnitConverterCSharp.Data
 {
-    internal class Lenght 
+    public enum ConvertType
     {
-
+        Temperature = 1,
+        Distance = 2,
+        Weight = 3,
     }
 }
